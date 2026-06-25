@@ -1,0 +1,59 @@
+import json
+from pathlib import Path
+
+DATA_DIR = Path(__file__).parent.parent / "data"
+
+
+class GuestService:
+
+    @staticmethod
+    def load_guests():
+        with open(DATA_DIR / "guests.json", encoding="utf-8") as f:
+            return json.load(f)
+
+    @staticmethod
+    def load_menu():
+        with open(DATA_DIR / "menu.json", encoding="utf-8") as f:
+            return json.load(f)
+
+    @staticmethod
+    def load_alcohol():
+        with open(DATA_DIR / "alcohol.json", encoding="utf-8") as f:
+            return json.load(f)
+
+    @classmethod
+    def get_guest_full(cls, token: str):
+        guests = cls.load_guests()
+        menu = cls.load_menu()
+        alcohol_db = cls.load_alcohol()
+
+        guest = guests.get(token)
+        if not guest:
+            return None
+
+        # --- блюда ---
+        dishes = guest.get("dishes", {})
+
+        enriched_dishes = {
+            key: menu.get(value)
+            for key, value in dishes.items()
+        }
+
+        # --- алкоголь ---
+        alcohol_list = guest.get("alcohol", [])
+
+        enriched_alcohol = [
+            alcohol_db.get(a) for a in alcohol_list if a in alcohol_db
+        ]
+
+        return {
+            "name": guest["name"],
+            "dishes": enriched_dishes,
+            "alcohol": enriched_alcohol,
+            "event": {
+                "place": "Ресторан-бар-караоке «Сытый лось», ул. Большая Семеновская, 50",
+                "phone": "+7 495 126 09 18",
+                "time": "4 июля 2026, сбор в 19:00–20:00",
+                "dresscode": "Друзья, как такового дресс-кода нет, приходите нарядные и так, чтобы вам было комфортно! Единственное пожелание невесты - не в белом)",
+            }
+        }
