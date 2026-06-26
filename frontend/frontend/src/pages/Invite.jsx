@@ -109,7 +109,14 @@ export default function Invite() {
 
   useEffect(() => {
     axios.get(`${API_URL}/api/guest/${token}`)
-      .then(res => setData(res.data));
+      .then(res => {
+        console.log("API response:", res.data);
+        setData(res.data);
+      })
+      .catch(err => {
+        console.error("API error:", err);
+        setData(null);
+      });
   }, [token]);
 
   useEffect(() => {
