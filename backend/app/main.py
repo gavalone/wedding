@@ -22,6 +22,4 @@ app.include_router(
 )
 
 
-@app.get("/debug")
-def debug():
-    return {"cors": "ACTIVE", "version": "2"}
+print("BACKEND VERSION 999")
