@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.invite import router
-
+print("MAIN FILE LOADED")
 app = FastAPI()
 
 app.add_middleware(
@@ -22,4 +22,6 @@ app.include_router(
 )
 
 
-print("BACKEND VERSION 999")
+@app.get("/whoami")
+def whoami():
+    return {"ok": True}
