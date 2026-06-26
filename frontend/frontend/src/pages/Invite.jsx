@@ -68,6 +68,7 @@ const DEFAULT_MENU = [
     category: "Десерты",
     items: [
       { name: "Фруктовая тарелка", description: "тарелка с сезонными фруктами и ягодами" },
+      { name: "Торт 'Медовик'", description: "торт, приготовленный мамой Инной" },
     ],
   },
 ];
@@ -141,7 +142,7 @@ export default function Invite() {
   if (!data) {
     return (
       <div className="page-bg h-screen flex items-center justify-center">
-        <p className="font-display italic text-[var(--muted)] text-lg animate-pulse">
+        <p className="font-body italic text-[var(--muted)] text-lg animate-pulse">
           Открываем приглашение…
         </p>
       </div>
@@ -272,7 +273,7 @@ export default function Invite() {
               </div>
 
               {started && (
-                <p className="text-center font-display italic text-[var(--rose)] text-sm margin-bottom-40">
+                <p className="text-center italic text-[var(--rose)] text-sm margin-bottom-40">
                   Праздник уже начался!
                 </p>
               )}
@@ -330,6 +331,21 @@ export default function Invite() {
                 <p className="text-center text-[15px] leading-8 text-[var(--ink)]">
                   {data.event.dresscode}
                 </p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
+                  className="envelope-note margin-bottom-40"
+                  style={{ marginTop: "40px" }}
+                >
+                  <p className="envelope-note-text">
+                    Дорогие гости! Если хотите поздравить нас с днем рождения нашей семьи,
+                    нам будет достаточно того, что Вы принесете в конвертах! К сожалению,
+                    цветы, сладости и другие подарки нам будет потом очень неудобно транспортировать.
+                    Спасибо за понимание и ждем вас и ваше хорошее настроение!
+                  </p>
+                </motion.div>
 
               </div>
             </motion.div>
@@ -416,20 +432,6 @@ export default function Invite() {
                 ))}
               </div>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
-              className="envelope-note section-block"
-            >
-              <p className="envelope-note-text">
-                Дорогие гости! Если хотите поздравить нас с днем рождения нашей семьи,
-                нам будет достаточно того, что Вы принесете в конвертах! К сожалению,
-                цветы, сладости и другие подарки нам будет потом очень неудобно транспортировать.
-                Спасибо за понимание и ждем вас и ваше хорошее настроение!
-              </p>
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}

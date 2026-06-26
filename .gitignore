@@ -38,7 +38,7 @@ __pycache__/
 # Virtual env
 venv/*
 .venv/*
-backend/.venv/*
+backend/.venv/
 
 # OS
 .DS_Store
