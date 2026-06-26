@@ -9,10 +9,11 @@
   --cream: #FBF3EA;           /* тёплый крем — поверхность билета */
   --plum: #3B1F3D;            /* глубокий баклажан — акцентные блоки */
   --plum-light: #54304F;
-  --gold: #C8853F;            /* тёплое золото — акценты, рамки */
-  --rose: #C65B6C;            /* пыльная роза — сердечки, штамп */
+  --gold: #C8853F;            /* тёплое золото — акценты, рамки (декоративное, не для текста) */
+  --gold-text: #9C5A24;       /* тёмный тёплый золотой — для ссылок/текста, читаемый контраст */
+  --rose: #A23F50;            /* пыльная роза, затемнена для читаемости текста */
+  --muted: #5C4738;           /* тёплый тёмно-коричневый — вторичный текст (было слишком светлым) */
   --ink: #2A1B22;             /* тёплый чёрно-коричневый — текст */
-  --muted: #8A7368;           /* тёплый таупе — вторичный текст */
   --beige: #EAD9C5;           /* бежевый — акценты (старый) */
   --peach: #F4D8C6;           /* персиковый — акценты (старый, для блюд) */
   --section-line: #d4b8a8;    /* декоративная линия под заголовками */
@@ -145,24 +146,9 @@
   }
 }
 
-.rainbow-decor {
-  position: fixed;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(280px, 46vw, 520px);
-  z-index: 0;
-  opacity: 0.85;
-  pointer-events: none;
-}
-.rainbow-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* карта */
 .map-wrapper {
+  position: relative;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -172,6 +158,55 @@
   box-shadow: 0 8px 20px rgba(42, 27, 34, 0.12);
   overflow: hidden;
   line-height: 0;
+}
+
+/* собственный заметный маркер по центру карты — не зависит от того,
+   насколько хорошо виден штатный значок виджета Яндекс.Карт */
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 10px rgba(42, 27, 34, 0.35));
+  animation: map-pin-bounce 1.8s ease-in-out infinite;
+}
+@keyframes map-pin-bounce {
+  0%, 100% { transform: translate(-50%, -100%) translateY(0); }
+  50%      { transform: translate(-50%, -100%) translateY(-6px); }
+}
+
+/* плашка «нажмите, чтобы открыть карту» — пока не нажата,
+   iframe не перехватывает тач-скролл (pointer-events:none),
+   и страница скроллится свободно даже поверх карты */
+.map-tap-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border: none;
+  cursor: pointer;
+  background: rgba(42, 27, 34, 0.28);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+}
+
+/* === ВРЕМЯ + ТАЙМЕР — единый блок === */
+.time-block {
+  text-align: center;
+  background: rgba(245, 230, 211, 0.35);
+  border: 1px solid rgba(200, 133, 63, 0.25);
+  border-radius: 22px;
+  padding: 28px 24px 30px;
 }
 
 /* таймер до свадьбы */
@@ -629,11 +664,6 @@
 
   .thanks-note {
     padding: 20px 18px;
-  }
-
-  .rainbow-decor {
-    width: clamp(220px, 70vw, 360px);
-    opacity: 0.7;
   }
 
   .section-heading {

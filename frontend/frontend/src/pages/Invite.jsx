@@ -58,6 +58,40 @@ const DEFAULT_MENU = [
     ],
   },
   {
+    category: "Салаты",
+    items: [
+      {
+        name: "Цезарь с курицей",
+        description: "Куриная грудка, айсберг, романо, сыр «Пармезан», томаты черри, соус «Цезарь», гренки, яйцо перепелиное",
+      },
+      {
+        name: "Салат с бурратой, пармской ветчиной и узбекскими помидорами",
+        description: "Томат розовый, пармская ветчина, руккола, лук красный, сыр Пармезан, микс-салат, крем-бальзами",
+      },
+      {
+        name: "Салат с ростбифом",
+        description: "Ростбиф, микс-салат, вяленые томаты, томаты черри, сыр «Пармезан», лук шалот, соус «Песто», бальзамический крем",
+      }
+    ],
+  },
+    {
+    category: "Горячие блюда",
+    items: [
+      {
+        name: "Шницель куриный с луковыми кольцами и картофельным пюре",
+        description: "",
+      },
+      {
+        name: "Бифштекс из мраморной говядины, салатом коул-слоу и картофелем «Айдахо»",
+        description: "Триминг из рибая, салат коул-слоу, горчица, картофель печеный с сыром «Моцарелла», грибной соус, кинза",
+      },
+      {
+        name: "Горячая рыбная сковородка",
+        description: "Форель, креветки магаданские, кукуруза, кабачки, болгарский перец",
+      }
+    ],
+  },
+  {
     category: "Хлеб / Фокачча",
     items: [
       { name: "Фокачча ассорти", description: "мука, вода, розмарин" },
@@ -68,7 +102,7 @@ const DEFAULT_MENU = [
     category: "Десерты",
     items: [
       { name: "Фруктовая тарелка", description: "тарелка с сезонными фруктами и ягодами" },
-      { name: "Торт 'Медовик'", description: "торт, приготовленный мамой Инной" },
+      { name: "Торт 'Медовик'", description: "торт от именитого кондитера (мамы Инны)" },
     ],
   },
 ];
@@ -96,6 +130,36 @@ const DEFAULT_BAR = [
       { name: "Тархун-Фейгуа" },
     ],
   },
+    {
+    category: "Игристое вино",
+    items: [
+      { name: "Балаклава Пино Нуар Брют Розе", description: "Крым, сухое"},
+    ],
+  },
+    {
+    category: "Белое вино",
+    items: [
+      { name: "Мезыбь Шардоне Вионье", description: "Краснодарский край, сухое"},
+    ],
+  },
+    {
+    category: "Красное вино",
+    items: [
+      { name: "Мезыбь Каберне Совиньон", description: "Краснодарский край, сухое"},
+    ],
+  },
+    {
+    category: "Водка",
+    items: [
+      { name: "'Белуга' Нобл"},
+    ],
+  },
+    {
+    category: "Виски",
+    items: [
+      { name: "Jim Beam"},
+    ],
+  },
 ];
 
 export default function Invite() {
@@ -104,6 +168,7 @@ export default function Invite() {
   const [opened, setOpened] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
   const [started, setStarted] = useState(false);
+  const [mapActive, setMapActive] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -195,19 +260,6 @@ export default function Invite() {
 
         <div className="page-shell">
 
-          {/* радуга*/}
-          <div className="rainbow-decor" aria-hidden="true">
-            <svg viewBox="0 0 400 200" className="rainbow-svg">
-              <path d="M20,200 A180,180 0 0 1 380,200" stroke="#ff8a8a" strokeWidth="18" fill="none" strokeLinecap="round" />
-              <path d="M38,200 A162,162 0 0 1 362,200" stroke="#ffb877" strokeWidth="18" fill="none" strokeLinecap="round" />
-              <path d="M56,200 A144,144 0 0 1 344,200" stroke="#ffe27a" strokeWidth="18" fill="none" strokeLinecap="round" />
-              <path d="M74,200 A126,126 0 0 1 326,200" stroke="#8fe0a0" strokeWidth="18" fill="none" strokeLinecap="round" />
-              <path d="M92,200 A108,108 0 0 1 308,200" stroke="#7ec8f2" strokeWidth="18" fill="none" strokeLinecap="round" />
-              <path d="M110,200 A90,90 0 0 1 290,200" stroke="#9aa3f5" strokeWidth="18" fill="none" strokeLinecap="round" />
-              <path d="M128,200 A72,72 0 0 1 272,200" stroke="#d99af0" strokeWidth="18" fill="none" strokeLinecap="round" />
-            </svg>
-          </div>
-
           {/* фото молодеженов */}
           {SIDE_PHOTOS.map((p, i) => (
             <div
@@ -219,7 +271,7 @@ export default function Invite() {
                 transform: `rotate(${p.rotate}deg)`,
               }}
             >
-              <img src={p.src} alt="" className="polaroid-img" />
+              <img src={p.src} alt="" className="polaroid-img" loading="lazy" decoding="async" />
             </div>
           ))}
 
@@ -234,7 +286,7 @@ export default function Invite() {
                 transform: `rotate(${m.rotate}deg)`,
               }}
             >
-              <img src={m.src} alt="" className="meme-img" />
+              <img src={m.src} alt="" className="meme-img" loading="lazy" decoding="async" />
             </div>
           ))}
 
@@ -261,37 +313,7 @@ export default function Invite() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="relative bg-[var(--cream)] rounded-[28px] shadow-xl px-7 py-8 sm:px-10 sm:py-10 section-block"
             >
-              {/* таймер до свадьбы */}
-              <div className="timer-container margin-bottom-40">
-                <div className="timer-unit">
-                  <span className="timer-value">
-                    {started ? "—" : String(timeLeft.days).padStart(2, "0")}
-                  </span>
-                  <span className="timer-label">дней</span>
-                </div>
-
-                <div className="timer-unit">
-                  <span className="timer-value">
-                    {started ? "—" : String(timeLeft.hours).padStart(2, "0")}
-                  </span>
-                  <span className="timer-label">часов</span>
-                </div>
-
-                <div className="timer-unit">
-                  <span className="timer-value">
-                    {started ? "—" : String(timeLeft.minutes).padStart(2, "0")}
-                  </span>
-                  <span className="timer-label">минут</span>
-                </div>
-              </div>
-
-              {started && (
-                <p className="text-center italic text-[var(--rose)] text-sm margin-bottom-40">
-                  Праздник уже начался!
-                </p>
-              )}
-
-              <div className="pt-7">
+              <div className="pt-1">
 
                 {/* место проведения */}
                 <h3 className="section-heading margin-bottom-40">
@@ -302,33 +324,93 @@ export default function Invite() {
                   <p>{data?.event?.place}</p>
                   <a
                     href={`tel:${data.event.phone}`}
-                    className="text-[var(--gold)] mt-2 inline-block"
+                    className="text-[var(--gold-text)] mt-2 inline-block"
                   >
                     {data.event.phone}
                   </a>
                 </div>
 
-                {/* карта */}
+                {/* карта (Яндекс) с явным маркером точки */}
                 <div className="map-wrapper margin-bottom-40">
                   <iframe
                     title="map"
                     width="100%"
                     height="240"
-                    style={{ border: 0, display: "block" }}
-                    src={`https://www.google.com/maps?q=${encodeURIComponent(
+                    loading="lazy"
+                    style={{
+                      border: 0,
+                      display: "block",
+                      pointerEvents: mapActive ? "auto" : "none",
+                    }}
+                    src={`https://yandex.ru/map-widget/v1/?text=${encodeURIComponent(
                       "Москва, ул. Большая Семеновская, 50"
-                    )}&output=embed`}
+                    )}&z=17`}
                   />
+
+                  {/* собственный заметный маркер по центру — не зависит от того,
+                      насколько хорошо виден штатный значок виджета */}
+                  <div className="map-pin" aria-hidden="true">
+                    <svg viewBox="0 0 24 36" width="36" height="54">
+                      <path
+                        d="M12 0C5.4 0 0 5.4 0 12c0 9 12 24 12 24s12-15 12-24C24 5.4 18.6 0 12 0z"
+                        fill="#e2553f"
+                        stroke="#ffffff"
+                        strokeWidth="1.5"
+                      />
+                      <circle cx="12" cy="12" r="5" fill="#ffffff" />
+                    </svg>
+                  </div>
+
+                  {!mapActive && (
+                    <button
+                      type="button"
+                      className="map-tap-overlay"
+                      onClick={() => setMapActive(true)}
+                    >
+                      Нажмите, чтобы открыть карту
+                    </button>
+                  )}
                 </div>
 
-                {/* время */}
-                <h3 className="section-heading margin-bottom-40">
-                  Время
-                </h3>
+                {/* === ВРЕМЯ + ТАЙМЕР ДО СВАДЬБЫ (один блок) === */}
+                <div className="time-block margin-bottom-40">
+                  <h3 className="section-heading margin-bottom-40">
+                    Время
+                  </h3>
 
-                <p className="text-center margin-bottom-40 text-[15px] leading-8 text-[var(--ink)]">
-                  {data.event.time}
-                </p>
+                  <p className="text-center margin-bottom-40 text-[15px] leading-8 text-[var(--ink)]">
+                    {data.event.time}
+                  </p>
+
+                  <div className="timer-container">
+                    <div className="timer-unit">
+                      <span className="timer-value">
+                        {started ? "—" : String(timeLeft.days).padStart(2, "0")}
+                      </span>
+                      <span className="timer-label">дней</span>
+                    </div>
+
+                    <div className="timer-unit">
+                      <span className="timer-value">
+                        {started ? "—" : String(timeLeft.hours).padStart(2, "0")}
+                      </span>
+                      <span className="timer-label">часов</span>
+                    </div>
+
+                    <div className="timer-unit">
+                      <span className="timer-value">
+                        {started ? "—" : String(timeLeft.minutes).padStart(2, "0")}
+                      </span>
+                      <span className="timer-label">минут</span>
+                    </div>
+                  </div>
+
+                  {started && (
+                    <p className="text-center italic text-[var(--rose)] text-sm mt-4">
+                      Праздник уже начался!
+                    </p>
+                  )}
+                </div>
 
                 <div className="photo-note margin-bottom-40">
                   <p className="photo-note-text">
@@ -344,21 +426,6 @@ export default function Invite() {
                 <p className="text-center text-[15px] leading-8 text-[var(--ink)]">
                   {data.event.dresscode}
                 </p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
-                  className="envelope-note margin-bottom-40"
-                  style={{ marginTop: "40px" }}
-                >
-                  <p className="envelope-note-text">
-                    Дорогие гости! Если хотите поздравить нас с днем рождения нашей семьи,
-                    нам будет достаточно того, что Вы принесете в конвертах! К сожалению,
-                    цветы, сладости и другие подарки нам будет потом очень неудобно транспортировать.
-                    Спасибо за понимание и ждем вас и ваше хорошее настроение!
-                  </p>
-                </motion.div>
 
               </div>
             </motion.div>
@@ -386,30 +453,6 @@ export default function Invite() {
             </div>
 
             <div className="section-block">
-
-              <SectionTitle title="Индивидуальный предзаказ блюд" />
-
-              <div className="dishes-grid">
-                {Object.entries(data.dishes).map(([key, dish]) => (
-                  <div key={key} className="dish-card">
-                    <h3 className="dish-title">{dish.title}</h3>
-
-                    <img
-                      src={dish.image}
-                      alt={dish.title}
-                      className="dish-image"
-                    />
-
-                    <p className="dish-description">
-                      {dish.description ? dish.description : " "}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-            </div>
-
-            <div className="section-block">
               <SectionTitle title="Бар" />
 
               <div className="default-menu">
@@ -431,31 +474,17 @@ export default function Invite() {
               </div>
             </div>
 
-            <div className="section-block text-center">
-              <SectionTitle title="Индивидуальный предзаказ напитков" />
-
-              <div className="flex justify-center gap-3 flex-wrap mt-6">
-                {data.alcohol.map((a, i) => (
-                  <span
-                    key={i}
-                    className="font-body text-sm bg-[var(--cream)] border border-[var(--gold)]/30 px-5 py-2 rounded-full shadow-sm"
-                  >
-                    {a?.title}
-                  </span>
-                ))}
-              </div>
-            </div>
-
+            {/* === ПРОСЬБА О ПОДАРКАХ — теперь в самом конце страницы === */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="thanks-note"
+              transition={{ duration: 0.9, ease: "easeOut" }}
+              className="envelope-note"
             >
-              <p className="thanks-note-text">
-                Все благодарности за тортик — маме жениха — Инне Анатольевне!
-                Замечательной маме и не менее замечательному кондитеру!
+              <p className="envelope-note-text">
+                Дорогие гости!
+                В качестве подарков будем рады получить от вас конверты! К сожалению, цветы, сладости и другие подарки будет очень неудобно транспортировать. Спасибо за понимание и ждем вас и ваше хорошее настроение!
               </p>
             </motion.div>
 
