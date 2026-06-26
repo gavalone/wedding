@@ -111,6 +111,12 @@ export default function Invite() {
     axios.get(`${API_URL}/api/guest/${token}`)
       .then(res => {
         console.log("API response:", res.data);
+
+        if (!res.data || !res.data.event) {
+          console.error("Invalid guest data", res.data);
+          return;
+        }
+
         setData(res.data);
       })
       .catch(err => {
@@ -293,7 +299,7 @@ export default function Invite() {
                 </h3>
 
                 <div className="text-center mb-6 text-[15px] leading-8 text-[var(--ink)]">
-                  <p>{data.event.place}</p>
+                  <p>{data?.event?.place}</p>
                   <a
                     href={`tel:${data.event.phone}`}
                     className="text-[var(--gold)] mt-2 inline-block"
