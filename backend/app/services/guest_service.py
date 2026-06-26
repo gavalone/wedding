@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -8,6 +9,11 @@ class GuestService:
 
     @staticmethod
     def load_guests():
+        guests_json = os.getenv("GUESTS_JSON")
+
+        if guests_json:
+            return json.loads(guests_json)
+
         with open(DATA_DIR / "guests.json", encoding="utf-8") as f:
             return json.load(f)
 
