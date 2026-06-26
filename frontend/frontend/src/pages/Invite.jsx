@@ -152,6 +152,9 @@ export default function Invite() {
     return () => clearInterval(interval);
   }, []);
 
+  console.log("API_URL =", API_URL);
+  console.log("FULL URL =", `${API_URL}/api/guest/${token}`);
+
   if (!data) {
     return (
       <div className="page-bg h-screen flex items-center justify-center">
