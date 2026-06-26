@@ -20,3 +20,8 @@ app.include_router(
     router,
     prefix="/api"
 )
+
+
+@app.get("/debug")
+def debug():
+    return {"cors": "ACTIVE", "version": "2"}
