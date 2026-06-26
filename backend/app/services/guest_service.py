@@ -19,11 +19,19 @@ class GuestService:
 
     @staticmethod
     def load_menu():
+        menu_json = os.getenv("MENU_JSON")
+        if menu_json:
+            return json.loads(menu_json)
+
         with open(DATA_DIR / "menu.json", encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
     def load_alcohol():
+        alcohol_json = os.getenv("ALCOHOL_JSON")
+        if alcohol_json:
+            return json.loads(alcohol_json)
+
         with open(DATA_DIR / "alcohol.json", encoding="utf-8") as f:
             return json.load(f)
 
