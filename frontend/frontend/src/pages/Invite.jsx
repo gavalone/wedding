@@ -7,32 +7,32 @@ import "./invite.css";
 
 /* Разбросанные instax-фото молодожёнов */
 const SIDE_PHOTOS = [
-  { src: "/images/1.jpg",  side: "left",  top: "2%",  offset: 14, rotate: -8 },
-  { src: "/images/2.jpg",  side: "right", top: "6%",  offset: 24, rotate: 7 },
-  { src: "/images/3.jpg",  side: "left",  top: "20%", offset: 34, rotate: 5 },
-  { src: "/images/4.jpg",  side: "right", top: "24%", offset: 10, rotate: -9 },
-  { src: "/images/5.jpg",  side: "left",  top: "38%", offset: 8,  rotate: -4 },
-  { src: "/images/6.jpg",  side: "right", top: "42%", offset: 30, rotate: 9 },
-  { src: "/images/7.jpg",  side: "left",  top: "56%", offset: 22, rotate: 8 },
-  { src: "/images/8.jpg",  side: "right", top: "60%", offset: 14, rotate: -6 },
-  { src: "/images/9.jpg",  side: "left",  top: "74%", offset: 30, rotate: -7 },
-  { src: "/images/10.jpg", side: "right", top: "78%", offset: 10, rotate: 5 },
-  { src: "/images/11.jpg", side: "left",  top: "83%", offset: 18, rotate: 6 },
-  { src: "/images/12.jpg", side: "right", top: "87%", offset: 26, rotate: -8 },
-  { src: "/images/13.jpg", side: "left",  top: "92%", offset: 12, rotate: 3 },
-  { src: "/images/14.jpg", side: "right", top: "96%", offset: 20, rotate: -4 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/1.jpg",  side: "left",  top: "2%",  offset: 14, rotate: -8 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/2.jpg",  side: "right", top: "6%",  offset: 24, rotate: 7 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/3.jpg",  side: "left",  top: "20%", offset: 34, rotate: 5 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/4.jpg",  side: "right", top: "24%", offset: 10, rotate: -9 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/5.jpg",  side: "left",  top: "38%", offset: 8,  rotate: -4 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/6.jpg",  side: "right", top: "42%", offset: 30, rotate: 9 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/7.jpg",  side: "left",  top: "56%", offset: 22, rotate: 8 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/8.jpg",  side: "right", top: "60%", offset: 14, rotate: -6 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/9.jpg",  side: "left",  top: "74%", offset: 30, rotate: -7 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/10.jpg", side: "right", top: "78%", offset: 10, rotate: 5 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/11.jpg", side: "left",  top: "83%", offset: 18, rotate: 6 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/12.jpg", side: "right", top: "87%", offset: 26, rotate: -8 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/13.jpg", side: "left",  top: "92%", offset: 12, rotate: 3 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/14.jpg", side: "right", top: "96%", offset: 20, rotate: -4 },
 ];
 
 /* Мемы */
 const MEME_PHOTOS = [
-  { src: "/images/mem1.jpg", side: "left",  top: "11%", offset: 50, rotate: -16 },
-  { src: "/images/mem2.jpg", side: "right", top: "15%", offset: 6,  rotate: 14 },
-  { src: "/images/mem3.jpg", side: "left",  top: "29%", offset: 4,  rotate: 18 },
-  { src: "/images/mem4.jpg", side: "right", top: "33%", offset: 46, rotate: -12 },
-  { src: "/images/mem5.jpg", side: "left",  top: "47%", offset: 40, rotate: 10 },
-  { src: "/images/mem6.jpg", side: "right", top: "51%", offset: 16, rotate: -18 },
-  { src: "/images/mem7.jpg", side: "left",  top: "65%", offset: 26, rotate: 12 },
-  { src: "/images/mem8.jpg", side: "right", top: "69%", offset: 44, rotate: -10 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem1.jpg", side: "left",  top: "11%", offset: 50, rotate: -16 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem2.jpg", side: "right", top: "15%", offset: 6,  rotate: 14 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem3.jpg", side: "left",  top: "29%", offset: 4,  rotate: 18 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem4.jpg", side: "right", top: "33%", offset: 46, rotate: -12 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem5.jpg", side: "left",  top: "47%", offset: 40, rotate: 10 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem6.jpg", side: "right", top: "51%", offset: 16, rotate: -18 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem7.jpg", side: "left",  top: "65%", offset: 26, rotate: 12 },
+  { src: "https://9si3yrtcvfypccik.public.blob.vercel-storage.com/mem8.jpg", side: "right", top: "69%", offset: 44, rotate: -10 },
 ];
 
 const DEFAULT_MENU = [
@@ -151,9 +151,6 @@ export default function Invite() {
     const interval = setInterval(tick, 1000 * 30);
     return () => clearInterval(interval);
   }, []);
-
-  console.log("API_URL =", API_URL);
-  console.log("FULL URL =", `${API_URL}/api/guest/${token}`);
 
   if (!data) {
     return (
